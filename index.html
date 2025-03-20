@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Gadgets store TG </title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(45deg, #FF6F61, #FF9A8B);
+      color: white;
+      padding: 50px 0;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 3.5em;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+      color: #f1f1f1;
+    }
+
+    .search-box {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .search-box input {
+      padding: 12px 25px;
+      width: 50%;
+      max-width: 500px;
+      border-radius: 30px;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      font-size: 16px;
+      outline: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: 0.3s ease;
+    }
+
+    .search-box input:focus {
+      border-color: #FF9A8B;
+      box-shadow: 0 5px 20px rgba(255, 154, 139, 0.3);
+    }
+
+    .filter-options {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .filter-options select {
+      padding: 12px;
+      margin: 0 10px;
+      font-size: 16px;
+      border-radius: 25px;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .filter-options select:hover {
+      border-color: #FF9A8B;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 20px;
+      margin-top: 40px;
+      transition: all 0.3s ease;
+    }
+
+    .product {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: 0.3s ease-in-out;
+      overflow: hidden;
+      text-align: center;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product:hover {box-shadow: #000000;
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(255, 0, 0, 0.15);
+    }
+
+    .product img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .product img:hover {
+      transform: scale(1.1); box-shadow: 0 20px 40px rgba(119, 0, 255, 0.15);
+    }
+
+    .product h3 {
+      font-size: 1.5em;
+      margin: 15px 0;
+      color: #222;
+      font-weight: 600;
+    }
+
+    .product p {
+      color: #666;
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 1.5em;
+      color: #FF9A8B;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .button {
+      padding: 14px 30px;
+      background: linear-gradient(145deg, #FF6F61, #FF9A8B);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px; 
+      font-size: 1.2em;
+      font-weight: bold;
+      display: inline-block;
+      transition: all 0.3s ease;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .button:hover {
+      background: linear-gradient(145deg, #FF9A8B, #FF6F61);
+      transform: translateY(-5px); 
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .button:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+   
+    .product .product-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    .product .product-details .price {
+      font-size: 1.4em;
+      color: #FF6F61;
+    }
+
+ 
+    @media (max-width: 768px) {
+      .search-box input {
+        width: 80%;
+      }
+
+      .filter-options {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .product {
+        padding: 15px;
+      }
+
+      .container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2.5em;
+      }
+
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .search-box input {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Best Tech Gadgets by TG</h1>
+    <p>Find the latest tech gadgets</p>
+  </header>
+
+
+  <div class="search-box">
+    <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Search for products..." aria-label="Search for products">
+  </div>
+
+
+  <div class="filter-options">
+    <select id="categoryFilter" onchange="filterByCategory()" aria-label="Filter by category">
+      <option value="">All Categories</option>
+      <option value="smartphone">Smartphones</option>
+      <option value="headphones">Headphones</option>
+      <option value="watch">Watches</option>
+      <option value="tv">TVs</option>
+      <option value="laptop">Laptops</option>
+      <option value="gym">Gym Equipment</option>
+    </select>
+
+    <select id="priceSort" onchange="sortByPrice()" aria-label="Sort by price">
+      <option value="">Sort by Price</option>
+      <option value="lowToHigh">Low to High</option>
+      <option value="highToLow">High to Low</option>
+    </select>
+  </div>
+
+  <div class="container" id="productContainer">
+  
+    <div class="product" data-name="Smartphone X" data-category="smartphone" data-price="899">
+      <img src="iphone.webp" alt="Smartphone X">
+      <h3>Apple iPhone 16 (White, 128 GB)</h3>
+      <p>iPhone 16. Built for Apple Intelligence. Featuring Camera Control. 48 MP Fusion camera. Five vibrant colours. And A18 chip.</p>
+      <div class="product-details">
+        <div class="price">₹74,900</div>
+        <a href="#" class="button buy-now">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="product" data-name="Wireless Headphones" data-category="headphones" data-price="199">
+      <img src="buds.webp" alt="Wireless Headphones">
+      <h3>OnePlus Buds 3 TWS</h3>
+      <p>Best in class sound quality with adaptive noise cancellation.</p>
+      <div class="product-details">
+        <div class="price">₹199</div>
+        <a href="#" class="button buy-now">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="product" data-name="Smartwatch X" data-category="watch" data-price="999">
+      <img src="watch.jpg" alt="Smartwatch X">
+      <h3>Fire-Boltt Ninja Call Pro Plus Smart Watch </h3>
+      <p>1.83 inch with Bluetooth Calling, AI Voice Assistance, 100 Sports Modes IP67 Rating, 240 * 280 Pixel High Resolution (Black)</p>
+      <div class="product-details">
+        <div class="price">₹1999</div>
+        <a href="#" class="button buy-now">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="product" data-name="Gaming Laptop" data-category="laptop" data-price="49999">
+      <img src="lp.jpg"alt="Gaming Laptop">
+      <h3>HP Victus Gaming Laptop</h3>
+      <p>AMD Ryzen 5 5600H, 4GB AMD Radeon RX 6500M graphics, 15.6-inch (39.6 cm), FHD, IPS,
+         144Hz, 8GB DDR4, 512GB SSD, Backlit KB, B&O, Dual speakers (MSO, Silver, 2.37 kg), fb0108AX</p>
+      <div class="product-details">
+        <div class="price">₹49,999</div>
+        <a href="#" class="button buy-now">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="product" data-name="Smart Vacuum" data-category="gym" data-price="7999">
+      <img src="v.jpg" alt="Smart Vacuum">
+      <h3>ILIFE A20 Pro Robot Vacuum Cleaner & Mopping</h3>
+      <p>6500Pa Strong Suction,Advanced LiDAR Navigation,Customized Cleaning Upto 4500sft,5200mAh,WiFi App,Alexa,GH,Ideal for Cats,Dogs Hair</p>
+      <div class="product-details">
+        <div class="price">₹19,899</div>
+        <a href="#" class="button buy-now">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="product" data-name="Bluetooth Speaker" data-category="headphones" data-price="799">
+      <img src="b.webp" alt="Bluetooth Speaker">
+      <h3>E GATE C210 | 20W Bluetooth Speaker </h3>
+      <p> Soundbar, Dual Drivers + Dual Passive Radiator for Extra bass, RGB Light, Upto 12 Hr 
+        Backup from 2000mah Battery, Call Function, TWS, Aux, USB, FM - eGate Sound bar</p>
+      <div class="product-details">
+        <div class="price">₹960</div>
+        <a href="#" class="button buy-now">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="product" data-name="Smartphone Y" data-category="smartphone" data-price="799">
+      <img src="p.jpg" alt="Smartphone Y">
+      <h3>iQOO Z9 5G</h3>
+      <p> (Brushed Green, 8GB RAM, 128GB Storage) | Dimensity 7200 5G Processor |
+         Sony IMX882 OIS Camera | 120Hz AMOLED with 1800 nits Local Peak Brightness | 44W Charger in The Box
+      </p>
+      <div class="product-details">
+        <div class="price">₹18,499</div>
+        <a href="#" class="button buy-now">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="product" data-name="Fitness Tracker" data-category="gym" data-price="999">
+      <img src="m.webp" alt="Fitness Tracker">
+      <h3>ZEBRONICS AC32FHD LED Monitor</h3>
+      <p> 32 inch (81.28cm), 250 nits, 75hz, 1800R Curved wide screen, FHD, 1080p, Wall Mountable, VGA, HDMI, Ultra Slim Bezel, Metal stand, Built-in Speakers
+      </p>
+      <div class="product-details">
+        <div class="price">₹10,499
+        </div>
+        <a href="#" class="button buy-now">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="product" data-name="Smart TV" data-category="tv" data-price="25999">
+      <img src="t.jpg" alt="Smart TV">
+      <h3>Sony BRAVIA 3 Series 139 cm (55 inches) smart tv</h3>
+      <p>Sony BRAVIA 3 Series 139 cm (55 inches) 4K Ultra HD AI Smart LED Google TV K-55S30B (Black)4 HDMI ports to connect set top box, Blu Ray players, gaming console | 2 USB ports to connect hard drives and other USB devices
+      </p>
+      <div class="product-details">
+        <div class="price">₹75,990</div>
+        <a href="#" class="button buy-now">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="product" data-name="Tablet Pro" data-category="tablet" data-price="12999">
+      <img src="tb.jpg" alt="Tablet Pro">
+      <h3>Redmi Pad Pro</h3>
+      <p> Snapdragon 7s Gen 2| 30.7cm(12.1") Tablet| 33+ Days Standby|10000mAh| HyperOS| 120Hz|6GB, 128GB| Quad Speakers|Wi-Fi 6| Mist Blue.</p>
+      <div class="product-details">
+        <div class="price">₹20,999
+        </div>
+        <a href="#" class="button buy-now">Buy Now</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+
+    function searchProducts() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toLowerCase();
+      const products = document.querySelectorAll('.product');
+
+      products.forEach(product => {
+        const productName = product.getAttribute('data-name').toLowerCase();
+        if (productName.indexOf(filter) > -1) {
+          product.style.display = '';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    }
+
+    function filterByCategory() {
+      const categoryFilter = document.getElementById('categoryFilter').value;
+      const products = document.querySelectorAll('.product');
+
+      products.forEach(product => {
+        const category = product.getAttribute('data-category');
+        if (categoryFilter === '' || category === categoryFilter) {
+          product.style.display = '';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    }
+
+    function sortByPrice() {
+      const sortOption = document.getElementById('priceSort').value;
+      const products = Array.from(document.querySelectorAll('.product'));
+
+      products.sort((a, b) => {
+        const priceA = parseFloat(a.getAttribute('data-price'));
+        const priceB = parseFloat(b.getAttribute('data-price'));
+
+        if (sortOption === 'lowToHigh') {
+          return priceA - priceB;
+        } else if (sortOption === 'highToLow') {
+          return priceB - priceA;
+        } else {
+          return 0;
+        }
+      });
+
+      const productContainer = document.getElementById('productContainer');
+      productContainer.innerHTML = '';
+      products.forEach(product => {
+        productContainer.appendChild(product);
+      });
+    }
+  </script>
+
+</body>
+</html>
